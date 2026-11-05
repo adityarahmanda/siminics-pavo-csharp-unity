@@ -1207,7 +1207,7 @@ namespace pavo
 
 	int pavo_driver::GetEchoMode()
 	{
-		//255,²»Ö§³Ö£¬1 ¹Ø 2 ¿ª 3 ¶þ´Î»Ø²¨¾àÀëÈ¡Áã
+		//255,ï¿½ï¿½Ö§ï¿½Ö£ï¿½1 ï¿½ï¿½ 2 ï¿½ï¿½ 3 ï¿½ï¿½ï¿½Î»Ø²ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½
 		const int LegalEchoMode[] = {255,1,2,3 };
 		char shift_bytes[PAVO_RESPONSE_LEN];
 		memset(shift_bytes, 0, PAVO_RESPONSE_LEN);
@@ -1233,7 +1233,7 @@ namespace pavo
 
 	bool pavo_driver::SetEchoMode(bool is)
 	{
-		//255,²»Ö§³Ö£¬1 ¹Ø 2 ¿ª 3 ¶þ´Î»Ø²¨¾àÀëÈ¡Áã
+		//255,ï¿½ï¿½Ö§ï¿½Ö£ï¿½1 ï¿½ï¿½ 2 ï¿½ï¿½ 3 ï¿½ï¿½ï¿½Î»Ø²ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½
 		const int LegalEchoMode[] = { 255,1,2,3 };
 		char shift_bytes[PAVO_RESPONSE_LEN];
 		memset(shift_bytes, 0, PAVO_RESPONSE_LEN);
@@ -1252,8 +1252,8 @@ namespace pavo
 
 	int pavo_driver::GetAntiMode()
 	{
-		//0xFFFF ²»Ö§³Ö 0x14f9 ¿ª 0x029a  ¹Ø
-		const int LeagalAntiMode[] = { 0xFFFF,0x14f9,0x029a }; //0x14f9 ¿ª
+		//0xFFFF ï¿½ï¿½Ö§ï¿½ï¿½ 0x14f9 ï¿½ï¿½ 0x029a  ï¿½ï¿½
+		const int LeagalAntiMode[] = { 0xFFFF,0x14f9,0x029a }; //0x14f9 ï¿½ï¿½
 		const  unsigned char windows_close[] = { 0x00,0x13,0x00,0xFA };
 		const  unsigned char windows_open[] = { 0x00,0x13,0x00,0x19 };
 		char shift_bytes[PAVO_RESPONSE_LEN];
@@ -1342,8 +1342,8 @@ namespace pavo
 
 	bool pavo_driver::SetAntiMode(bool is)
 	{
-		//0xFFFF ²»Ö§³Ö 0x14f9 ¿ª 0x029a  ¹Ø
-		const int LegalAntiMode[] = { 0xFFFF,0x14f9,0x029a }; //0x14f9 ¿ª
+		//0xFFFF ï¿½ï¿½Ö§ï¿½ï¿½ 0x14f9 ï¿½ï¿½ 0x029a  ï¿½ï¿½
+		const int LegalAntiMode[] = { 0xFFFF,0x14f9,0x029a }; //0x14f9 ï¿½ï¿½
 		const  unsigned char windows_close[] = { 0x00,0x13,0x00,0xFA };
 		const  unsigned char windows_open[] = { 0x00,0x13,0x00,0x19 };
 		char shift_bytes[PAVO_RESPONSE_LEN];

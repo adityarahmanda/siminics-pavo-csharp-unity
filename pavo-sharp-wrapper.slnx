@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="pavo-cpp-wrapper.vcxproj" />
+  <Project Path="D:/pavo-cpp-wrapper/pavo-sharp-wrapper.vcxproj" Id="8eb5a2e0-dfda-454b-ad3d-384e885dac4e" />
 </Solution>

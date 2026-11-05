@@ -12,6 +12,7 @@
 [Bb]uild/
 [Oo]ut/
 ipch/
+/packages/
 
 # Compiled files
 *.obj
