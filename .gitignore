@@ -1,0 +1,31 @@
+# Visual Studio user settings and caches
+.vs/
+*.user
+*.suo
+*.cache
+
+# Build outputs
+[Dd]ebug/
+[Rr]elease/
+[Ww]in32/
+[Xx]64/
+[Bb]uild/
+[Oo]ut/
+ipch/
+
+# Compiled files
+*.obj
+*.o
+*.pch
+*.pdb
+*.ilk
+*.exp
+*.lib
+*.dll
+*.exe
+
+# Generated Visual Studio files
+*.VC.db
+*.VC.VC.opendb
+*.sdf
+*.opensdf
