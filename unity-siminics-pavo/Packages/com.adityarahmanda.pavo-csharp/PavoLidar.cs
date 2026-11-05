@@ -306,6 +306,11 @@ namespace Pavo
             return buffer.ToString();
         }
 
+        public void SetMergeCoefficient(object mergeCoefficient)
+        {
+            throw new NotImplementedException();
+        }
+
         private static class NativeMethods
         {
             [DllImport(NativeLibrary, EntryPoint = "Pavo_Create", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]

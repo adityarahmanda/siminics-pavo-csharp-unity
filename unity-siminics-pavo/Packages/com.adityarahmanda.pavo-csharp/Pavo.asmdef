@@ -1,0 +1,14 @@
+{
+    "name": "AdityaRahmanda.PavoCSharp",
+    "rootNamespace": "AdityaRahmanda.PavoCSharp",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

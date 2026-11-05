@@ -1,0 +1,11 @@
+{
+  "name": "com.adityarahmanda.pavo-csharp",
+  "version": "1.0.0",
+  "author": {
+    "name": "Aditya Rahmanda",
+    "email": "adityarahmanda.workspace@gmail.com"
+  },
+  "documentationUrl": "https://github.com/LZY-Visual/unity-lzy-packages",
+  "displayName": "Pavo CSharp",
+  "description": "Siminics Pavo SDK Wrapper."
+}
