@@ -1,7 +1,7 @@
 {
   "dependencies": {
-    "com.adityarahmanda.pavo-csharp": {
-      "version": "file:com.adityarahmanda.pavo-csharp",
+    "com.adityarahmanda.siminics-pavo": {
+      "version": "file:com.adityarahmanda.siminics-pavo",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}
