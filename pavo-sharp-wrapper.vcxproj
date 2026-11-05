@@ -80,6 +80,7 @@
       <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)pavo_sdk2.0.9\include;$(ProjectDir)packages\boost.1.84.0\lib\native\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
+      <AdditionalDependencies>libboost_thread-vc142-mt-gd-x32-1_84.lib;libboost_chrono-vc142-mt-gd-x32-1_84.lib;libboost_random-vc142-mt-gd-x32-1_84.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
@@ -95,12 +96,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;PAVOSHARPWRAPPER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;BOOST_ALL_NO_LIB;PAVOSHARPWRAPPER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp14</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)pavo_sdk2.0.9\include;$(ProjectDir)packages\boost.1.84.0\lib\native\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
+            <AdditionalDependencies>libboost_thread-vc142-mt-x32-1_84.lib;libboost_chrono-vc142-mt-x32-1_84.lib;libboost_random-vc142-mt-x32-1_84.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
@@ -120,7 +122,8 @@
       <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)pavo_sdk2.0.9\include;$(ProjectDir)packages\boost.1.84.0\lib\native\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>libboost_thread-vc142-mt-gd-x64-1_84.lib;libboost_chrono-vc142-mt-gd-x64-1_84.lib;libboost_random-vc142-mt-gd-x64-1_84.lib;%(AdditionalDependencies)</AdditionalDependencies>      <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>libboost_thread-vc142-mt-gd-x64-1_84.lib;libboost_chrono-vc142-mt-gd-x64-1_84.lib;libboost_random-vc142-mt-gd-x64-1_84.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
       <AdditionalLibraryDirectories>$(ProjectDir)packages\boost_thread-vc142.1.84.0\lib\native;$(ProjectDir)packages\boost_chrono-vc142.1.84.0\lib\native;$(ProjectDir)packages\boost_random-vc142.1.84.0\lib\native;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -135,12 +138,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;PAVOSHARPWRAPPER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;BOOST_ALL_NO_LIB;PAVOSHARPWRAPPER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp14</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)pavo_sdk2.0.9\include;$(ProjectDir)packages\boost.1.84.0\lib\native\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
+      <AdditionalDependencies>libboost_thread-vc142-mt-x32-1_84.lib;libboost_chrono-vc142-mt-x32-1_84.lib;libboost_random-vc142-mt-x32-1_84.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
