@@ -113,7 +113,7 @@ namespace
                 return Fail(PAVO_STATUS_BUFFER_TOO_SMALL, "String output buffer is too small");
 
             std::memcpy(buffer, value.c_str(), required);
-            return PAVO_STATUS_OK;
+            return static_cast<int32_t>(PAVO_STATUS_OK);
         });
     }
 }
@@ -180,7 +180,7 @@ extern "C"
                 }
                 state.opened = true;
                 state.has_pending_scan = false;
-                return PAVO_STATUS_OK;
+                return static_cast<int32_t>(PAVO_STATUS_OK);
             }
             catch (...)
             {
@@ -199,7 +199,7 @@ extern "C"
             state.opened = false;
             state.pending_scan.clear();
             state.has_pending_scan = false;
-            return PAVO_STATUS_OK;
+            return static_cast<int32_t>(PAVO_STATUS_OK);
         });
     }
 
@@ -228,7 +228,7 @@ extern "C"
         return WithHandle(handle, true, [&](PavoHandle& state)
         {
             *connected = state.driver->is_lidar_connected() ? 1 : 0;
-            return PAVO_STATUS_OK;
+            return static_cast<int32_t>(PAVO_STATUS_OK);
         });
     }
 
@@ -272,7 +272,7 @@ extern "C"
             }
             state.pending_scan.clear();
             state.has_pending_scan = false;
-            return PAVO_STATUS_OK;
+            return static_cast<int32_t>(PAVO_STATUS_OK);
         });
     }
 
@@ -281,7 +281,7 @@ extern "C"
         return WithHandle(handle, true, [&](PavoHandle& state)
         {
             state.driver->enable_data(enabled != 0);
-            return PAVO_STATUS_OK;
+            return static_cast<int32_t>(PAVO_STATUS_OK);
         });
     }
 
@@ -290,7 +290,7 @@ extern "C"
         return WithHandle(handle, true, [&](PavoHandle& state)
         {
             state.driver->enable_motor(enabled != 0);
-            return PAVO_STATUS_OK;
+            return static_cast<int32_t>(PAVO_STATUS_OK);
         });
     }
 
@@ -304,7 +304,7 @@ extern "C"
             if (value < 0)
                 return Fail(PAVO_STATUS_SDK_ERROR, "Failed to read device type");
             *device_type = value;
-            return PAVO_STATUS_OK;
+            return static_cast<int32_t>(PAVO_STATUS_OK);
         });
     }
 
@@ -338,7 +338,7 @@ extern "C"
             if (!state.driver->get_motor_speed(value))
                 return Fail(PAVO_STATUS_SDK_ERROR, "Failed to read motor speed");
             *speed = value;
-            return PAVO_STATUS_OK;
+            return static_cast<int32_t>(PAVO_STATUS_OK);
         });
     }
 
@@ -360,7 +360,7 @@ extern "C"
             if (!state.driver->get_merge_coef(value))
                 return Fail(PAVO_STATUS_SDK_ERROR, "Failed to read merge coefficient");
             *coefficient = value;
-            return PAVO_STATUS_OK;
+            return static_cast<int32_t>(PAVO_STATUS_OK);
         });
     }
 
@@ -382,7 +382,7 @@ extern "C"
             if (!state.driver->get_degree_shift(value))
                 return Fail(PAVO_STATUS_SDK_ERROR, "Failed to read degree shift");
             *shift = value;
-            return PAVO_STATUS_OK;
+            return static_cast<int32_t>(PAVO_STATUS_OK);
         });
     }
 
@@ -401,7 +401,7 @@ extern "C"
         return WithHandle(handle, true, [&](PavoHandle& state)
         {
             state.driver->get_degree_scope(*minimum, *maximum);
-            return PAVO_STATUS_OK;
+            return static_cast<int32_t>(PAVO_STATUS_OK);
         });
     }
 
@@ -422,7 +422,7 @@ extern "C"
             pavo_mode_t value = Unknown;
             state.driver->get_pavo_mode(value);
             *mode = static_cast<int32_t>(value);
-            return PAVO_STATUS_OK;
+            return static_cast<int32_t>(PAVO_STATUS_OK);
         });
     }
 
@@ -443,7 +443,7 @@ extern "C"
         return WithHandle(handle, true, [&](PavoHandle& state)
         {
             state.driver->enable_tail_filter(method);
-            return PAVO_STATUS_OK;
+            return static_cast<int32_t>(PAVO_STATUS_OK);
         });
     }
 
@@ -570,7 +570,7 @@ extern "C"
             if (!state.driver->get_error_code(value))
                 return Fail(PAVO_STATUS_SDK_ERROR, "Failed to read device error code");
             *error_code = value;
-            return PAVO_STATUS_OK;
+            return static_cast<int32_t>(PAVO_STATUS_OK);
         });
     }
 }

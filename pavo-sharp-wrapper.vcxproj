@@ -74,16 +74,16 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;PAVOSHARPWRAPPER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;BOOST_ALL_NO_LIB;PAVOSHARPWRAPPER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp14</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)pavo_sdk2.0.9\include;$(BOOST_ROOT);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)pavo_sdk2.0.9\include;$(ProjectDir)packages\boost.1.84.0\lib\native\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalLibraryDirectories>$(BOOST_LIBRARYDIR);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)packages\boost_thread-vc142.1.84.0\lib\native;$(ProjectDir)packages\boost_chrono-vc142.1.84.0\lib\native;$(ProjectDir)packages\boost_random-vc142.1.84.0\lib\native;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Manifest>
       <EnableSegmentHeap>true</EnableSegmentHeap>
@@ -98,13 +98,13 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;PAVOSHARPWRAPPER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp14</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)pavo_sdk2.0.9\include;$(BOOST_ROOT);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)pavo_sdk2.0.9\include;$(ProjectDir)packages\boost.1.84.0\lib\native\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalLibraryDirectories>$(BOOST_LIBRARYDIR);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)packages\boost_thread-vc142.1.84.0\lib\native;$(ProjectDir)packages\boost_chrono-vc142.1.84.0\lib\native;$(ProjectDir)packages\boost_random-vc142.1.84.0\lib\native;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Manifest>
       <EnableSegmentHeap>true</EnableSegmentHeap>
@@ -114,16 +114,16 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;PAVOSHARPWRAPPER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;BOOST_ALL_NO_LIB;PAVOSHARPWRAPPER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp14</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)pavo_sdk2.0.9\include;$(BOOST_ROOT);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)pavo_sdk2.0.9\include;$(ProjectDir)packages\boost.1.84.0\lib\native\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>libboost_thread-vc142-mt-gd-x64-1_84.lib;libboost_chrono-vc142-mt-gd-x64-1_84.lib;libboost_random-vc142-mt-gd-x64-1_84.lib;%(AdditionalDependencies)</AdditionalDependencies>      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalLibraryDirectories>$(BOOST_LIBRARYDIR);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)packages\boost_thread-vc142.1.84.0\lib\native;$(ProjectDir)packages\boost_chrono-vc142.1.84.0\lib\native;$(ProjectDir)packages\boost_random-vc142.1.84.0\lib\native;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Manifest>
       <EnableSegmentHeap>true</EnableSegmentHeap>
@@ -138,13 +138,13 @@
       <PreprocessorDefinitions>NDEBUG;PAVOSHARPWRAPPER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp14</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)pavo_sdk2.0.9\include;$(BOOST_ROOT);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)pavo_sdk2.0.9\include;$(ProjectDir)packages\boost.1.84.0\lib\native\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalLibraryDirectories>$(BOOST_LIBRARYDIR);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)packages\boost_thread-vc142.1.84.0\lib\native;$(ProjectDir)packages\boost_chrono-vc142.1.84.0\lib\native;$(ProjectDir)packages\boost_random-vc142.1.84.0\lib\native;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Manifest>
       <EnableSegmentHeap>true</EnableSegmentHeap>
@@ -164,11 +164,17 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="packages\boost.1.84.0\build\boost.targets" Condition="Exists('packages\boost.1.84.0\build\boost.targets')" />
+    <Import Project="packages\boost_chrono-vc142.1.84.0\build\boost_chrono-vc142.targets" Condition="Exists('packages\boost_chrono-vc142.1.84.0\build\boost_chrono-vc142.targets')" />
+    <Import Project="packages\boost_thread-vc142.1.84.0\build\boost_thread-vc142.targets" Condition="Exists('packages\boost_thread-vc142.1.84.0\build\boost_thread-vc142.targets')" />
+    <Import Project="packages\boost_random-vc142.1.84.0\build\boost_random-vc142.targets" Condition="Exists('packages\boost_random-vc142.1.84.0\build\boost_random-vc142.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('packages\boost.1.84.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\boost.1.84.0\build\boost.targets'))" />
+    <Error Condition="!Exists('packages\boost_chrono-vc142.1.84.0\build\boost_chrono-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\boost_chrono-vc142.1.84.0\build\boost_chrono-vc142.targets'))" />
+    <Error Condition="!Exists('packages\boost_thread-vc142.1.84.0\build\boost_thread-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\boost_thread-vc142.1.84.0\build\boost_thread-vc142.targets'))" />
+    <Error Condition="!Exists('packages\boost_random-vc142.1.84.0\build\boost_random-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\boost_random-vc142.1.84.0\build\boost_random-vc142.targets'))" />
   </Target>
 </Project>
