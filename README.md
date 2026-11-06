@@ -4,39 +4,68 @@ A Unity package and native wrapper for connecting to Siminics Pavo LiDAR devices
 
 ## Installation
 
-### Install from a cloned repository
+### Install via Clone
 
-Clone this repository:
+Clone this project using this command line
 
 ```sh
-git clone <repository-url>
+git clone https://github.com/adityarahmanda/siminics-pavo-csharp-unity.git
 ```
 
-In Unity, open **Window > Package Manager**, click **+**, choose **Add package from disk...**, then select:
+### Install via Git Url
 
-```text
-unity-siminics-pavo/Packages/com.adityarahmanda.siminics-pavo/package.json
+1. Open Unity Package Manager
+
+2. Click `+`
+
+3. Select `Add package from git URL...`
+
+4. Paste this URL
+
+```
+https://github.com/adityarahmanda/siminics-pavo-csharp-unity.git?path=/unity-siminics-pavo/Packages/com.adityarahmanda.siminics-pavo
 ```
 
-### Install via OpenUPM scoped registry
+### Install via Tarball Releases
 
-Use this method when the package version you need has been published to OpenUPM.
+1. Go to [Releases](https://github.com/adityarahmanda/unity-balinese-date/releases) page
 
-1. In Unity, open **Edit > Project Settings > Package Manager**.
-2. Add a scoped registry with these values:
+2. Download `.tgz` from the latest release
 
-   | Label | Value |
-   | --- | --- |
-   | Name | Aditya Rahmanda |
-   | URL | `https://package.openupm.com` |
-   | Scope(s) | `com.adityarahmanda` |
+3. In Unity, open Window/Package Manager
 
-3. Click **Save** or **Apply**, then open **Window > Package Manager**.
-4. Install **Siminics Pavo** from **My Registries**, or click **+ > Add package by name...** and enter:
+    - Click `+`
+    - Select `Add package by tarball...`
+    - Select the downloaded file to import it
 
-   ```text
-   com.adityarahmanda.siminics-pavo
-   ```
+### Install via Scoped Registry
+
+1. In Unity, Open `Edit -> Project Settings -> Package Manager`
+
+2. Add a new Scoped Registry (or edit the existing OpenUPM entry)
+
+    |Label|Value|
+    |----|----|
+    |Name|Aditya Rahmanda|
+    |URL|https://package.openupm.com|
+    |Scope(s)|com.adityarahmanda|
+
+3. Click `Save` or `Apply`
+
+4. Open Window/Package Manager
+
+5. There are several ways to add the package
+
+    - Go to My Registries section, 
+    - Find `Aditya Rahmanda`'s `Siminics Pavo` package 
+    - Click `Install` Button
+  
+    or
+
+    - Click `+`
+    - Select `Add package by name...`
+    - Paste `com.adityarahmanda.siminics-pavo` into name
+    - Click Add
 
 ### Use in a Unity script
 
@@ -46,7 +75,7 @@ Add a `PavoLidarInstance` component to a GameObject and configure its IP address
 using Pavo;
 using UnityEngine;
 
-public class ScanListener : MonoBehaviour
+public class SampleScript : MonoBehaviour
 {
     [SerializeField] private PavoLidarInstance lidar;
 
