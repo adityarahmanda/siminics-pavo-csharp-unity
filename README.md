@@ -2,6 +2,10 @@
 
 A Unity package and native wrapper for connecting to Siminics Pavo LiDAR devices over the network. The package exposes scan data and device controls through a C# API and a Unity `MonoBehaviour`.
 
+<img width="479" height="588" alt="Screenshot 2026-11-06 092557" src="https://github.com/user-attachments/assets/95cd2087-bc13-4e06-94f3-81d1a5f7e356" />
+
+<img width="895" height="433" alt="Screenshot 2026-11-06 092718" src="https://github.com/user-attachments/assets/dd3cb5be-c1d4-4958-9e2c-111e322e103c" />
+
 ## Installation
 
 ### Install via Clone
