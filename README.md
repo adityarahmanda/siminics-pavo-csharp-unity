@@ -1,5 +1,7 @@
 # Siminics Pavo SDK for Unity
 
+[![openupm](https://img.shields.io/npm/v/com.adityarahmanda.siminics-pavo?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.adityarahmanda.siminics-pavo/)
+
 A Unity package and native wrapper for connecting to Siminics Pavo LiDAR devices over the network. The package exposes scan data and device controls through a C# API and a Unity `MonoBehaviour`.
 
 <img width="479" height="588" alt="Screenshot 2026-11-06 092557" src="https://github.com/user-attachments/assets/95cd2087-bc13-4e06-94f3-81d1a5f7e356" />
