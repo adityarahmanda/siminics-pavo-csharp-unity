@@ -2,11 +2,7 @@
 
 [![openupm](https://img.shields.io/npm/v/com.adityarahmanda.siminics-pavo?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.adityarahmanda.siminics-pavo/)
 
-A Unity package and native wrapper for connecting to Siminics Pavo LiDAR devices over the network. The package exposes scan data and device controls through a C# API and a Unity `MonoBehaviour`.
-
-<img width="479" height="588" alt="Screenshot 2026-11-06 092557" src="https://github.com/user-attachments/assets/95cd2087-bc13-4e06-94f3-81d1a5f7e356" />
-
-<img width="895" height="433" alt="Screenshot 2026-11-06 092718" src="https://github.com/user-attachments/assets/dd3cb5be-c1d4-4958-9e2c-111e322e103c" />
+Siminics Pavo SDK Wrapper for Unity. It allows you to connect to and process data from the Siminics Pavo sensor.
 
 ## Installation
 
@@ -34,7 +30,7 @@ https://github.com/adityarahmanda/siminics-pavo-csharp-unity.git?path=/unity-sim
 
 ### Install via Tarball Releases
 
-1. Go to [Releases](https://github.com/adityarahmanda/unity-balinese-date/releases) page
+1. Go to [Releases](https://github.com/adityarahmanda/siminics-pavo-csharp-unity/releases) page
 
 2. Download `.tgz` from the latest release
 
@@ -73,27 +69,33 @@ https://github.com/adityarahmanda/siminics-pavo-csharp-unity.git?path=/unity-sim
     - Paste `com.adityarahmanda.siminics-pavo` into name
     - Click Add
 
-### Use in a Unity script
-
-Add a `PavoLidarInstance` component to a GameObject and configure its IP address and port in the Inspector. It connects on `Awake` by default and raises `onScanFrame` when a scan arrives:
+### Using in Code
 
 ```csharp
-using Pavo;
+using Rahmanda.PavoSDK;
 using UnityEngine;
 
 public class SampleScript : MonoBehaviour
 {
-    [SerializeField] private PavoLidarInstance lidar;
+    [SerializeField] private PavoLidar lidar;
 
     private void Awake()
     {
         lidar.onScanFrame.AddListener(OnScanFrame);
     }
 
-    private void OnScanFrame(int pointCount, uint timestamp)
+    private void OnScanFrame(ScanFrame scanFrame)
     {
-        if (pointCount > 0 && lidar.TryGetScanPoint(pointCount - 1, out PavoScanPoint point))
-            Debug.Log($"Scan {timestamp}: {point.angle}, {point.distance}, {point.intensity}");
+        PavoScanPoint[] points = scanFrame.points;
+        if (points != null && points.Length > 0)
+        {
+            var lastPoint = points[points.Length - 1];
+            Debug.Log($"Received scan frame with {points.Length} points. Last scan point: {lastPoint.angle}, {lastPoint.distance}, Intensity: {lastPoint.intensity}");
+        }
+        else
+        {
+            Debug.Log("Received scan frame with no points.");
+        }
     }
 }
 ```
