@@ -7,5 +7,5 @@
   },
   "documentationUrl": "https://github.com/adityarahmanda/siminics-pavo-csharp-unity",
   "displayName": "Siminics Pavo",
-  "description": "Siminics Pavo SDK Wrapper for Unity. It allows you to connect to and process data from the Siminics PAVO sensor."
+  "description": "Siminics Pavo SDK Wrapper for Unity. It allows you to connect to and process data from the Siminics Pavo sensor."
 }
