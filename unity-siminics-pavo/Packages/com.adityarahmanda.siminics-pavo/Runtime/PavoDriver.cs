@@ -2,7 +2,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Pavo
+namespace Rahmanda.PavoSDK
 {
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct PavoScanPoint
@@ -20,7 +20,7 @@ namespace Pavo
         Anti = 2
     }
 
-    public sealed class PavoLidar : IDisposable
+    public sealed class PavoDriver : IDisposable
     {
         private delegate int StringGetter(IntPtr handle, StringBuilder buffer, uint bufferCapacity, out uint requiredCapacity);
 
@@ -34,7 +34,7 @@ namespace Pavo
 
         public PavoScanPoint[] Points { get; private set; }
 
-        public PavoLidar()
+        public PavoDriver()
         {
             handle = NativeMethods.Create();
             if (handle == IntPtr.Zero)

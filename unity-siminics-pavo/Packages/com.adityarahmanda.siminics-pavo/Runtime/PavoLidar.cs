@@ -4,19 +4,9 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Pavo
+namespace Rahmanda.PavoSDK
 {
-    [Serializable]
-    public class PavoBoolEvent : UnityEvent<bool>
-    {
-    }
-
-    [Serializable]
-    public class PavoScanFrameEvent : UnityEvent<int, uint>
-    {
-    }
-
-    public class PavoLidarInstance : MonoBehaviour
+    public class PavoLidar : MonoBehaviour
     {
         [Header("Connection Settings")]
         [SerializeField] public string ipAddress = "10.10.10.101";
@@ -36,8 +26,6 @@ namespace Pavo
         [SerializeField] public int minDegreeScope = 3500;
         [Tooltip("Maximum scan angle in hundredths of a degree. Valid range: 0-35999 and greater than minDegreeScope.")]
         [SerializeField] public int maxDegreeScope = 35999;
-        [Tooltip("Enable diagnostic messages from the LiDAR worker.")]
-        [SerializeField] public bool enableLogs = true;
 
         [Header("Device Info")]
         [SerializeField] private string m_firmwareVersion;
@@ -46,18 +34,17 @@ namespace Pavo
         [SerializeField] private int m_deviceType;
 
         [Header("Events")]
-        public PavoBoolEvent onIsConnectedChanged = new PavoBoolEvent();
-        public PavoScanFrameEvent onScanFrame = new PavoScanFrameEvent();
+        public UnityEvent<bool> onIsConnectedChanged = new UnityEvent<bool>();
+        public UnityEvent<ScanFrame> onScanFrame = new UnityEvent<ScanFrame>();
 
         private const int ScanTimeoutMilliseconds = 100;
-        private readonly ConcurrentQueue<string> m_pendingLogs = new ConcurrentQueue<string>();
         private readonly ConcurrentQueue<ScanFrame> m_pendingScanFrames = new ConcurrentQueue<ScanFrame>();
-        private readonly object m_pointsLock = new object();
+        private readonly object m_scanFrameLock = new object();
+        private ScanFrame m_latestScanFrame;
         private readonly ConcurrentQueue<bool> m_pendingConnectionStates = new ConcurrentQueue<bool>();
         private Thread m_worker;
         private volatile bool m_stopRequested;
         private bool m_isConnected;
-        private PavoScanPoint[] m_latestPoints = Array.Empty<PavoScanPoint>();
 
         public string FirmwareVersion => m_firmwareVersion;
         public uint ProductNumber => m_productNumber;
@@ -78,17 +65,17 @@ namespace Pavo
 
             while (m_pendingScanFrames.TryDequeue(out ScanFrame frame))
             {
-                lock (m_pointsLock)
-                    m_latestPoints = frame.points;
-                onScanFrame.Invoke(frame.pointCount, frame.timestamp);
-            }
-
-            while (m_pendingLogs.TryDequeue(out string message))
-            {
-                if (enableLogs)
-                    Debug.Log(message, this);
+                lock (m_scanFrameLock)
+                    m_latestScanFrame = frame;
+                onScanFrame.Invoke(m_latestScanFrame);
             }
         }
+
+        private void OnDestroy()
+        {
+            Disconnect();
+        }
+
 
         public void Connect(string newIpAddress = null, int newPort = -1, PavoMode newMode = PavoMode.Unknown, int newMotorSpeed = -1, int newDegreeShift = -1, int newMergeCoefficient = -1, int newMinDegreeScope = -1, int newMaxDegreeScope = -1)
         {
@@ -102,16 +89,16 @@ namespace Pavo
             int requestedMaxDegreeScope = newMaxDegreeScope >= 0 ? newMaxDegreeScope : maxDegreeScope;
 
             if (string.IsNullOrWhiteSpace(requestedIpAddress))
-                throw new ArgumentException("An IP address is required.", nameof(newIpAddress));
+                throw new ArgumentException("[PavoLidar] An IP address is required.", nameof(newIpAddress));
 
             if (requestedDegreeShift < 0 || requestedDegreeShift > 35999)
-                throw new ArgumentOutOfRangeException(nameof(requestedDegreeShift), "The degree shift must be between 0 and 35999.");
+                throw new ArgumentOutOfRangeException(nameof(requestedDegreeShift), "[PavoLidar] The degree shift must be between 0 and 35999.");
 
             if (requestedMergeCoefficient != 1 && requestedMergeCoefficient != 2 && requestedMergeCoefficient != 4 && requestedMergeCoefficient != 8)
-                throw new ArgumentOutOfRangeException(nameof(requestedMergeCoefficient), "The merge coefficient must be 1, 2, 4, or 8.");
+                throw new ArgumentOutOfRangeException(nameof(requestedMergeCoefficient), "[PavoLidar] The merge coefficient must be 1, 2, 4, or 8.");
 
             if (requestedMinDegreeScope < 0 || requestedMinDegreeScope > 35999 || requestedMaxDegreeScope < 0 || requestedMaxDegreeScope > 35999 || requestedMinDegreeScope >= requestedMaxDegreeScope)
-                throw new ArgumentException("The degree scope must satisfy 0 <= min < max <= 35999.");
+                throw new ArgumentException("[PavoLidar] The degree scope must satisfy 0 <= min < max <= 35999.");
 
             Disconnect();
 
@@ -125,7 +112,7 @@ namespace Pavo
             maxDegreeScope = requestedMaxDegreeScope;
             
             m_stopRequested = false;
-            m_worker = new Thread(ReadLidar) { IsBackground = true, Name = "Pavo Lidar" };
+            m_worker = new Thread(ReadLidar) { IsBackground = true, Name = "PavoLidar" };
             m_worker.Start();
         }
 
@@ -143,25 +130,23 @@ namespace Pavo
             {
                 worker.Join(2000);
                 if (worker.IsAlive)
-                    QueueLog("Pavo Lidar worker did not stop before the timeout.");
+                    Debug.Log("[PavoLidar] Worker did not stop before the timeout.");
             }
 
             if (!worker.IsAlive)
                 m_worker = null;
-            SetConnectionState(false);
-        }
 
-        private void OnDestroy()
-        {
-            Disconnect();
+            SetConnectionState(false);
         }
 
         private void ReadLidar()
         {
-            PavoLidar lidar = null;
+            PavoDriver lidar = null;
             try
             {
-                lidar = new PavoLidar();
+                Debug.Log($"[PavoLidar] Connecting to {ipAddress}:{port}.");
+
+                lidar = new PavoDriver();
                 lidar.Open(ipAddress, (ushort)port);
                 if (mode != PavoMode.Unknown)
                     lidar.SetMode(mode);
@@ -169,9 +154,19 @@ namespace Pavo
                 lidar.SetDegreeShift(degreeShift);
                 lidar.SetMergeCoefficient(mergeCoefficient);
                 lidar.SetDegreeScope(minDegreeScope, maxDegreeScope);
-                QueueLog("Pavo Lidar opened.");
+
                 SaveDeviceInfo(lidar);
-                QueueLog($"Pavo Lidar Info:\nFirmware Version: {m_firmwareVersion}\nProduct Number: {m_productNumber}\nSerial Number: {m_serialNumber}\nDevice Type: {m_deviceType}\nMode: {mode}\nDegree Shift: {degreeShift}\nDegree Scope: {minDegreeScope} - {maxDegreeScope}");
+
+                Debug.Log($"[PavoLidar] Connected to {ipAddress}:{port}.");
+                Debug.Log("[PavoLidar] Device Information:\n" +
+                    $"Firmware Version: {m_firmwareVersion}\n" +
+                    $"Product Number: {m_productNumber}\n" +
+                    $"Serial Number: {m_serialNumber}\n" +
+                    $"Device Type: {m_deviceType}\n" +
+                    $"Mode: {mode}\n" +
+                    $"Degree Shift: {degreeShift}\n" +
+                    $"Degree Scope: {minDegreeScope} - {maxDegreeScope}");
+                
                 m_pendingConnectionStates.Enqueue(true);
 
                 while (!m_stopRequested)
@@ -181,9 +176,9 @@ namespace Pavo
 
                     var points = new PavoScanPoint[pointCount];
                     Array.Copy(lidar.Points, points, pointCount);
+
                     m_pendingScanFrames.Enqueue(new ScanFrame
                     {
-                        pointCount = pointCount,
                         timestamp = timestamp,
                         points = points
                     });
@@ -191,7 +186,7 @@ namespace Pavo
             }
             catch (Exception e)
             {
-                QueueLog("Pavo Lidar error: " + e.Message);
+                Debug.LogError("[PavoLidar] Error: \n" + e);
                 m_pendingConnectionStates.Enqueue(false);
             }
             finally
@@ -201,26 +196,17 @@ namespace Pavo
                     try
                     {
                         lidar.Dispose();
-                        QueueLog("Pavo Lidar disposed.");
+                        Debug.Log("[PavoLidar] Device disposed.");
                     }
                     catch (Exception e)
                     {
-                        QueueLog("Failed to dispose Pavo Lidar: " + e.Message);
+                        Debug.LogError("[PavoLidar] Failed to dispose device. Error: \n" + e);
                     }
                     m_pendingConnectionStates.Enqueue(false);
                 }
-            }
-        }
 
-        private void SaveDeviceInfo(PavoLidar lidar)
-        {
-            m_firmwareVersion = lidar.GetFirmwareVersion();
-            m_productNumber = lidar.GetDeviceProductNumber();
-            m_serialNumber = lidar.GetDeviceSerialNumber();
-            m_deviceType = lidar.GetDeviceType();
-            mode = lidar.GetMode();
-            degreeShift = lidar.GetDegreeShift();
-            lidar.GetDegreeScope(out minDegreeScope, out maxDegreeScope);
+                Debug.Log("[PavoLidar] Disconnected.");
+            }
         }
 
         private void SetConnectionState(bool connected)
@@ -231,31 +217,20 @@ namespace Pavo
             onIsConnectedChanged.Invoke(connected);
         }
 
-        private void QueueLog(string message)
+        private void SaveDeviceInfo(PavoDriver lidar)
         {
-            if (enableLogs)
-                m_pendingLogs.Enqueue(message);
-        }
-
-        public bool TryGetScanPoint(int index, out PavoScanPoint point)
-        {
-            lock (m_pointsLock)
-            {
-                if (index < 0 || index >= m_latestPoints.Length)
-                {
-                    point = default(PavoScanPoint);
-                    return false;
-                }
-
-                point = m_latestPoints[index];
-                return true;
-            }
+            m_firmwareVersion = lidar.GetFirmwareVersion();
+            m_productNumber = lidar.GetDeviceProductNumber();
+            m_serialNumber = lidar.GetDeviceSerialNumber();
+            m_deviceType = lidar.GetDeviceType();
+            mode = lidar.GetMode();
+            degreeShift = lidar.GetDegreeShift();
+            lidar.GetDegreeScope(out minDegreeScope, out maxDegreeScope);
         }
     }
 
     public struct ScanFrame
     {
-        public int pointCount;
         public uint timestamp;
         public PavoScanPoint[] points;
     }

@@ -1,6 +1,6 @@
 {
-    "name": "AdityaRahmanda.PavoCSharp",
-    "rootNamespace": "AdityaRahmanda.PavoCSharp",
+    "name": "Rahmanda.PavoSDK",
+    "rootNamespace": "Rahmanda.PavoSDK",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
