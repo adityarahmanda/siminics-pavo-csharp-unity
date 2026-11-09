@@ -48,8 +48,7 @@ namespace Rahmanda.PavoSDK
 
             if (m_scanFrame.points == null || m_scanFrame.points.Length == 0) return;
 
-            Vector2 size = rectTransform.rect.size;
-            Vector2 center = new Vector2(size.x * -0.5f, size.y * -0.5f);
+            Vector2 center = new Vector2(0, 0);
             foreach (var point in m_scanFrame.points)
             {
                 Vector2 pointVector2 = Vector2Helper.ToVector2(center, rotation, point) * scale;

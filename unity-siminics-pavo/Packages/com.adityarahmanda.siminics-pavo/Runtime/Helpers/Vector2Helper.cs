@@ -19,8 +19,8 @@ namespace Rahmanda.PavoSDK
 
         public static Vector2 ToVector2(Vector2 origin, float rotation, PavoScanPoint point)
         {
-            Vector2 pointF = ToVector2(origin, rotation, point.angle, point.distance);
-            return pointF;
+            Vector2 vector2 = ToVector2(origin, rotation, (point.angle / 100.0f), point.distance);
+            return vector2;
         }
     }
 }
