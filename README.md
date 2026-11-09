@@ -4,6 +4,8 @@
 
 Siminics Pavo SDK Wrapper for Unity. It allows you to connect to and process data from the Siminics Pavo sensor.
 
+![demonstration](docs/siminics-pavo-unity-demonstration.gif)
+
 ## Installation
 
 ### Install via Clone
